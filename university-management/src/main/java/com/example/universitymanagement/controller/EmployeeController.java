@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/employees")
+//@RequestMapping("/api/employees")
 public class EmployeeController {
     private final EmployeeService employeeService;
 
@@ -18,31 +18,29 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping
+    @GetMapping("/api/employees")
     public List<Employee> getAllEmployees() {
 
         return employeeService.getAllEmployees();
     }
 
-    @GetMapping("/{employeeId}")
-    public Employee getEmployeeById(@PathVariable Long employeeId) {
-        return employeeService.getEmployeeById(employeeId);
+    @GetMapping("/api/employees/{employeeid}")
+    public Employee getEmployeeById(@PathVariable Long employeeid) {
+        return employeeService.getEmployeeById(employeeid);
     }
 
-    @PostMapping
+    @PostMapping("/api/employee")
     public Employee createEmployee(@RequestBody Employee employee) {
-
         return employeeService.createEmployee(employee);
     }
 
-    @PutMapping("/{employeeId}")
-    public Employee updateEmployee(@PathVariable Long employeeId, @RequestBody Employee updatedEmployee) {
-        return employeeService.updateEmployee(employeeId, updatedEmployee);
+    @PutMapping("/api/employees/{employeeid}")
+    public Employee updateEmployee(@PathVariable Long employeeid, @RequestBody Employee updatedEmployee) {
+        return employeeService.updateEmployee(employeeid, updatedEmployee);
     }
 
-    @DeleteMapping("/{employeeId}")
-    public void deleteEmployee(@PathVariable Long employeeId) {
-
-        employeeService.deleteEmployee(employeeId);
+    @DeleteMapping("/api/employees/{employeeid}")
+    public void deleteEmployee(@PathVariable Long employeeid) {
+        employeeService.deleteEmployee(employeeid);
     }
 }

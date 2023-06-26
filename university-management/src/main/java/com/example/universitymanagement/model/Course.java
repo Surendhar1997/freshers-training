@@ -1,28 +1,30 @@
 package com.example.universitymanagement.model;
 
+import jakarta.persistence.*;
 
-import javax.persistence.*;
-
-@Entity
+@Entity(name = "Course")
 @Table(name = "courses")
-
 public class Course {
 
     @Id
+    @Column(name = "courseid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long courseId;
-
+    private Long courseid;
+    
+    @Column(name = "title")
     private String title;
+    
+    @Column(name = "description")
     private String description;
 
     public Long getCourseId() {
 
-        return courseId;
+        return courseid;
     }
 
-    public void setCourseId(Long courseId) {
+    public void setCourseId(Long courseid) {
 
-        this.courseId = courseId;
+        this.courseid = courseid;
     }
 
     public String getTitle() {
@@ -44,20 +46,5 @@ public class Course {
 
         this.description = description;
     }
-
-    public Employee getInstructor() {
-
-        return instructor;
-    }
-
-    public void setInstructor(Employee instructor) {
-
-        this.instructor = instructor;
-    }
-
-//    @ManyToOne
-//    @JoinColumn(name = "instructor_id")
-    private Employee instructor;
-
 
 }

@@ -1,24 +1,29 @@
 package com.example.universitymanagement.model;
-import javax.persistence.*;
-@Entity
+import jakarta.persistence.*;
+
+@Entity(name = "University")
 @Table(name = "universities")
 public class University {
 
     @Id
+    @Column(name = "universityid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long universityId;
-
+    private Long universityid;
+    
+    @Column(name = "name")
     private String name;
+    
+    @Column(name = "location")
     private String location;
 
     public Long getUniversityId() {
 
-        return universityId;
+        return universityid;
     }
 
-    public void setUniversityId(Long universityId) {
+    public void setUniversityId(Long universityid) {
 
-        this.universityId = universityId;
+        this.universityid = universityid;
     }
 
     public String getName() {

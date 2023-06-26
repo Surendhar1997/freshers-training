@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/departments")
+//@RequestMapping("/api/departments")
 public class DepartmentController {
     private final DepartmentService departmentService;
 
@@ -17,30 +17,28 @@ public class DepartmentController {
         this.departmentService = departmentService;
     }
 
-    @GetMapping
+    @GetMapping("/api/departments")
     public List<Department> getAllDepartments() {
-
         return departmentService.getAllDepartments();
     }
 
-    @GetMapping("/{departmentId}")
-    public Department getDepartmentById(@PathVariable Long departmentId) {
-        return departmentService.getDepartmentById(departmentId);
+    @GetMapping("/api/departments/{departmentid}")
+    public Department getDepartmentById(@PathVariable Long departmentid) {
+        return departmentService.getDepartmentById(departmentid);
     }
 
-    @PostMapping
+    @PostMapping("/api/department")
     public Department createDepartment(@RequestBody Department department) {
         return departmentService.createDepartment(department);
     }
 
-    @PutMapping("/{departmentId}")
-    public Department updateDepartment(@PathVariable Long departmentId, @RequestBody Department updatedDepartment) {
-        return departmentService.updateDepartment(departmentId, updatedDepartment);
+    @PutMapping("/api/departments/{departmentid}")
+    public Department updateDepartment(@PathVariable Long departmentid, @RequestBody Department updatedDepartment) {
+        return departmentService.updateDepartment(departmentid, updatedDepartment);
     }
 
-    @DeleteMapping("/{departmentId}")
-    public void deleteDepartment(@PathVariable Long departmentId) {
-
-        departmentService.deleteDepartment(departmentId);
+    @DeleteMapping("/api/departments/{departmentid}")
+    public void deleteDepartment(@PathVariable Long departmentid) {
+        departmentService.deleteDepartment(departmentid);
     }
 }

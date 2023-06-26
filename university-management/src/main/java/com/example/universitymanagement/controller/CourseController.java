@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/courses")
+//@RequestMapping("/api/courses")
 public class CourseController {
     private final CourseService courseService;
 
@@ -15,32 +15,30 @@ public class CourseController {
         this.courseService = courseService;
     }
 
-    @GetMapping
+    @GetMapping("/api/courses")
     public List<Course> getAllCourses() {
-
         return courseService.getAllCourses();
     }
 
-    @GetMapping("/{courseId}")
-    public Course getCourseById(@PathVariable Long courseId) {
+    @GetMapping("/api/courses/{courseid}")
+    public Course getCourseById(@PathVariable Long courseid) {
 
-        return courseService.getCourseById(courseId);
+        return courseService.getCourseById(courseid);
     }
 
-    @PostMapping
+    @PostMapping("/api/course")
     public Course createCourse(@RequestBody Course course) {
 
         return courseService.createCourse(course);
     }
 
-    @PutMapping("/{courseId}")
-    public Course updateCourse(@PathVariable Long courseId, @RequestBody Course updatedCourse) {
-        return courseService.updateCourse(courseId, updatedCourse);
+    @PutMapping("/api/courses/{courseid}")
+    public Course updateCourse(@PathVariable Long courseid, @RequestBody Course updatedCourse) {
+        return courseService.updateCourse(courseid, updatedCourse);
     }
-
-    @DeleteMapping("/{courseId}")
-    public void deleteCourse(@PathVariable Long courseId) {
-
-        courseService.deleteCourse(courseId);
+    
+    @DeleteMapping("/api/courses/{courseid}")
+    public void deleteCourse(@PathVariable Long courseid) {
+        courseService.deleteCourse(courseid);
     }
 }
