@@ -1,49 +1,90 @@
 package com.example.universitymanagement.model;
-import jakarta.persistence.*;
+
+import java.io.Serializable;
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity(name = "Employee")
 @Table(name = "employees")
-public class Employee {
-	
-    @Id
-    @Column(name = "employeeid")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long employeeid;
-    
-    @Column(name = "name")
-    private String name;
-    
-    @Column(name = "position")
-    private String position;
+public class Employee implements Serializable {
 
-    public Long getEmployeeId() {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8190319926710666246L;
 
-        return employeeid;
-    }
+	@Id
+	@Column(name = "employeeid")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long employeeid;
 
-    public void setEmployeeId(Long employeeid) {
+	@Column(name = "name")
+	private String name;
 
-        this.employeeid = employeeid;
-    }
+	@Column(name = "position")
+	private String position;
 
-    public String getName() {
+	@ManyToOne
+	@JoinColumn(name = "departmentid")
+	private Department departmentid;
 
-        return name;
-    }
+//	@ManyToMany(mappedBy = "employees",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "employeecourses", joinColumns = { @JoinColumn(name = "employeeid") }, inverseJoinColumns = {
+			@JoinColumn(name = "courseid") })
+	@ManyToMany(cascade = CascadeType.ALL)
+	private Set<Course> courses;
 
-    public void setName(String name) {
+	public Long getEmployeeId() {
 
-        this.name = name;
-    }
+		return employeeid;
+	}
 
-    public String getPosition() {
+	public void setEmployeeId(Long employeeid) {
 
-        return position;
-    }
+		this.employeeid = employeeid;
+	}
 
-    public void setPosition(String position) {
+	public String getName() {
 
-        this.position = position;
-    }
+		return name;
+	}
 
+	public void setName(String name) {
+
+		this.name = name;
+	}
+
+	public String getPosition() {
+
+		return position;
+	}
+
+	public void setPosition(String position) {
+
+		this.position = position;
+	}
+
+	public Department getDepartmentid() {
+		return departmentid;
+	}
+
+	public void setDepartmentId(Department departmentid) {
+
+		this.departmentid = departmentid;
+	}
+
+//	public Set<Course> getCourses() {
+//		return courses;
+//	}
 }
