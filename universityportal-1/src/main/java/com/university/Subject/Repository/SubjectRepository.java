@@ -8,5 +8,5 @@ import com.university.Subject.Entity.Subject;
 
 
 public interface SubjectRepository extends JpaRepository<Subject, Long> {
-    List<Subject> findAllBySubject_Id(Long subject_id);
+    List<Subject> findAllBySubjectId(Long subjectId);
 } 

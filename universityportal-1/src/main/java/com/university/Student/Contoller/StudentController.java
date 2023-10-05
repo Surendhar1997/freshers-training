@@ -21,33 +21,31 @@ import com.university.Student.Service.StudentService;
 @RequestMapping("/student")
 
 public class StudentController {
-	 @Autowired
-	    private StudentService studentService;
-                
-	    @PostMapping("/save")
-	    public ResponseEntity<Student> saveStudent(@RequestBody Student stdObj) {
-	        studentService.saveStudent(stdObj);
-	        return new ResponseEntity<>(HttpStatus.CREATED);
-	    }
+	@Autowired
+	private StudentService studentService;
 
-	    @GetMapping(value = {"/getStudents", "/{studentId}"})
-	    public List<Student> getStudent(@PathVariable(required = false) Long student_id) {
-	       
-			return studentService.getStudentDetails(student_id);
-	    }
-
-	    @DeleteMapping("delete/{studentid}")
-	    public ResponseEntity<Student> removeStudent(@PathVariable Long student_id){
-	    	studentService.deleteStudent(student_id);
-	        return new ResponseEntity(HttpStatus.OK);
-	    }
-
-	    @PutMapping("/{studentid}/subject/{subjectId}")
-	    public Student assignSubjectToStudent(
-	            @PathVariable Long student_id,
-	            @PathVariable Long subject_id
-	    ){
-	        return studentService.assignSubjectToStudent(student_id, subject_id);
-	    }
+	@PostMapping("/save")
+	public ResponseEntity<Student> saveStudent(@RequestBody Student stdObj) {
+		return ResponseEntity.ok(studentService.saveStudent(stdObj));
 	}
 
+	@GetMapping(value = { "/getStudents", "/{studentId}" })
+	public List<Student> getStudent(@PathVariable(required = false) Long studentId) {
+
+		return studentService.getStudentDetails(studentId);
+	}
+
+	@DeleteMapping("delete/{studentId}")
+	public ResponseEntity<Student> removeStudent(@PathVariable Long studentId) {
+		studentService.deleteStudent(studentId);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+
+	  @PutMapping("/{studentId}/subject/{subjectId}")
+          public Student assignSubjectToStudent(
+	            @PathVariable Long studentId,
+	            @PathVariable Long subjectId
+    ){
+	        return studentService.assignSubjectToStudent(studentId, subjectId);
+	    }
+}

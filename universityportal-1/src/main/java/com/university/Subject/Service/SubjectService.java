@@ -15,20 +15,20 @@ public class SubjectService {
 	@Autowired
     private SubjectRepository subjectRepository;
 
-    public void saveSubject(Subject subjectObj) {
-    	subjectRepository.save(subjectObj);
+    public  Subject saveSubject(Subject subjectObj) {
+    	return subjectRepository.save(subjectObj);
     }
 
-    public List<Subject> getSubjectDetails(Long subject_id) {
-        if (null != subject_id) {
-            return subjectRepository.findAllBySubject_Id(subject_id);
+    public List<Subject> getSubjectDetails(Long subjectId) {
+        if (null != subjectId) {
+            return subjectRepository.findAllBySubjectId(subjectId);
         } else {
             return subjectRepository.findAll();
         }
     }
 
-    public void deleteSubject(Long subject_id) {
-    	subjectRepository.deleteById(subject_id);
+    public void deleteSubject(Long subjectId) {
+    	subjectRepository.deleteById(subjectId);
     }
 }
 

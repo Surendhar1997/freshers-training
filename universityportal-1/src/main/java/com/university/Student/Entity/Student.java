@@ -8,29 +8,22 @@ import javax.persistence.*;
 import com.university.Subject.Entity.Subject;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Data
 public class Student {
-	    @Id
-	    @GeneratedValue(strategy = GenerationType.AUTO)
-	    private Long student_id;
-	    private String student_name;
+	private String studentName;
 
-	    @ManyToMany
-	    @JoinTable(name = "studentsubject",
-	            joinColumns = @JoinColumn(name = "student_id"),
-	            inverseJoinColumns = @JoinColumn(name = "subject_id")
-	    )
-	    private Set<Subject> assignedSubjects = new HashSet<>();
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long studentId;
 
-		public void setAssignedSubjects(Set<Subject> subjectSet) {
-			// TODO Auto-generated method stub
-			
-		}
 
-		public Set<Subject> getAssignedSubjects() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-	}
+
+	@ManyToMany
+	@JoinTable(name = "student_subject", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "subject_id"))
+
+	private Set<Subject> assignedSubjects = new HashSet();
+}

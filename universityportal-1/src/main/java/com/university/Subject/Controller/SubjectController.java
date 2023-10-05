@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.university.Student.Entity.Student;
 import com.university.Subject.Entity.Subject;
 import com.university.Subject.Repository.SubjectRepository;
 import com.university.Subject.Service.SubjectService;
@@ -28,21 +29,21 @@ import com.university.Subject.Service.SubjectService;
 
 	    
 	    @PostMapping("/save")
-	    public ResponseEntity createSubject(@RequestBody Subject subjectObj) {
-	        subjectService.saveSubject(subjectObj);
-	        return new ResponseEntity(HttpStatus.CREATED);
+	    public ResponseEntity<Subject> saveSubject(@RequestBody Subject subObj) {
+			return ResponseEntity.ok(subjectService.saveSubject(subObj));
 	    }
 
 	    @GetMapping(value = {"/getsubjects", "/{subjectId}"})
-	    public List<Subject> getSubjects(@PathVariable(required = false) Long subject_id) {
-	        return subjectService.getSubjectDetails(subject_id);
+	    public List<Subject> getSubjects(@PathVariable(required = false) Long subjectId) {
+	        return subjectService.getSubjectDetails(subjectId);
 	    }
 
 	    @DeleteMapping("/delete/{subjectId}")
-	    public ResponseEntity removeSubject(@PathVariable Long subject_id) {
-	    	subjectService.deleteSubject(subject_id);
-	        return new ResponseEntity(HttpStatus.OK);
+	    public ResponseEntity<Void> removeSubject(@PathVariable Long subjectId) {
+	        subjectService.deleteSubject(subjectId);
+	        return ResponseEntity.ok().build();
 	    }
+
 	}
 
 

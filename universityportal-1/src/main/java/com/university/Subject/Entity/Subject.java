@@ -14,18 +14,19 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "subject")
+@Table(name = "SUBJECT")
 
 public class Subject {
 
 
 	    @Id
 	    @GeneratedValue(strategy = GenerationType.AUTO)
-	    private Long subject_id;
-	    private String subject_name;
+	    private Long subjectId;
+	    private String subjectName;
 
 	    @JsonIgnore
 	    @ManyToMany(mappedBy = "assignedSubjects")
 	    private Set<Student> studentSet = new HashSet<>();
 	}
 
+ 
