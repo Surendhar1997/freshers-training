@@ -2,6 +2,7 @@ package com.university.Student.Service;
 
 import com.university.Subject.Entity.*;
 import com.university.Subject.Repository.SubjectRepository;
+import com.university.Teacher.Entity.Teacher;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,7 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.university.SubjectAssignmentRequest;
 import com.university.Student.Entity.Student;
 import com.university.Student.Repository.StudentRepository;
 
@@ -60,5 +62,38 @@ public class StudentService {
         student.setAssignedSubjects(subjectSet);
         return studentRepository.save(student);
     }
-}
+
+	public Student removeSubjectFromStudent(Long studentId, Long subjectId) {
+		// TODO Auto-generated method stub
+		Student student = studentRepository.findById(studentId).get();
+        Subject subject = subjectRepository.findById(subjectId).get();
+        student.removeSubject(subject);
+        studentRepository.save(student);
+
+        return student;
+    }
+
+		public Student updateStudentAssignedSubject(Long studentId, Long subjectId, SubjectAssignmentRequest assignmentRequest) {
+		    Student student = studentRepository.findById(studentId).orElse(null);
+		    Subject subject = subjectRepository.findById(subjectId).orElse(null);
+		    student.getAssignedSubjects().add(subject);
+		    student = studentRepository.save(student);
+		    return student;
+		}
+
+	
+	
+
+
+       
+
+  
+        
+
+
+
+	}
+	  
+
+
 
